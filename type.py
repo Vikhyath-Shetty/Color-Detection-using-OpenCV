@@ -1,11 +1,9 @@
-from typing import Union, Literal, Set
+from typing import List, Literal, Set
 import numpy as np
-from typing import Tuple, Sequence
+from typing import Tuple
 
-color = Literal["red", "green", "blue"]
-colorSet = Set[color]
-colorInput = Union[color, colorSet]
+Color = Literal["red", "green", "blue"]
+ColorInput = Set[Color]
 
 
-SingleHSVRange = Tuple[np.ndarray, np.ndarray]
-HSVRange = SingleHSVRange | Sequence[SingleHSVRange]
+HSVRange = List[Tuple[np.ndarray, np.ndarray]]
