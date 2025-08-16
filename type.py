@@ -1,9 +1,13 @@
-from typing import List, Literal, Set
+from typing import Literal, Set, Union,Tuple,List
 import numpy as np
-from typing import Tuple
+from numpy.typing import NDArray
 
-Color = Literal["red", "green", "blue"]
-ColorInput = Set[Color]
+# Type for color input from user
+Color = Literal["red", "green", "blue", "yellow"]
+ColorSet = Set[Color]
+ColorInput = Union[Color, ColorSet]
 
-
-HSVRange = List[Tuple[np.ndarray, np.ndarray]]
+# HSV color space representations
+HSVBound = NDArray[np.uint8]
+HSVPair  = Tuple[HSVBound, HSVBound]
+HSVRange = List[HSVPair]
