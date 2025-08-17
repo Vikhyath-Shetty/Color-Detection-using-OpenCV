@@ -11,4 +11,3 @@ COLOR_RANGES: Dict[str, HSVRange] = {
     "yellow": [(np.array([15, 150, 150]), np.array([35, 255, 255]))]
 }
 
-PHONE_CAM = "http://10.157.107.60:4747/video"
