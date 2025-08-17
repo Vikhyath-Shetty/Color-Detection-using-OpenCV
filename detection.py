@@ -3,7 +3,7 @@ import cv2 as cv
 import numpy as np
 from type import Color, ColorInput
 from config import COLOR_RANGES
-from utils import *
+from utils import is_color_input
 
 #Function to create mask for red
 def create_red_mask(frame: np.ndarray) -> np.ndarray:
@@ -54,7 +54,7 @@ def detect_color(cam_src: int | str, color: ColorInput) -> None:
         
         hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
         mask = create_mask(hsv_frame, color)
-        result = cv.bitwise_and(hsv_frame, hsv_frame, mask=mask)
+        result = cv.bitwise_and(frame, frame, mask=mask)
         cv.imshow('Color Detection', result)
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
