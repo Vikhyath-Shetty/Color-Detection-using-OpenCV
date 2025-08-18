@@ -5,7 +5,9 @@ from type import Color, ColorInput
 from config import COLOR_RANGES
 from utils import is_color_input
 
-#Function to create mask for red
+# Function to create mask for red
+
+
 def create_red_mask(frame: np.ndarray) -> np.ndarray:
     red_range = COLOR_RANGES["red"]
     red_mask_1 = cv.inRange(frame, red_range[0][0], red_range[0][1])
@@ -14,34 +16,36 @@ def create_red_mask(frame: np.ndarray) -> np.ndarray:
     return red_mask
 
 
-#Function to create mask for other colors
+# Function to create mask for other colors
 def create_other_mask(frame: np.ndarray, color: Color) -> np.ndarray:
     color_range = COLOR_RANGES[color]
-    mask = cv.inRange(frame,color_range[0][0],color_range[0][1])
+    mask = cv.inRange(frame, color_range[0][0], color_range[0][1])
     return mask
 
 
-#Function to create mask 
+# Function to create mask
 def create_mask(frame: np.ndarray, color: ColorInput) -> np.ndarray:
     if isinstance(color, str):
-        if str == "red":
+        if color == "red":
             mask = create_red_mask(frame)
         else:
             mask = create_other_mask(frame, color)
     else:
+        mask = None
         for col in color:
             if col == "red":
-                mask = create_red_mask(frame)
+                temp_mask = create_red_mask(frame)
             else:
-                mask = create_other_mask(frame,col)    
+                temp_mask = create_other_mask(frame, col)
+            mask = temp_mask if mask is None else cv.bitwise_or(mask, temp_mask)
     return mask
 
 
-#Function to detect color from the video feed
+# Function to detect color from the video feed
 def detect_color(cam_src: int | str, color: ColorInput) -> None:
     if not is_color_input:
         raise ValueError("Invalid color parameter")
-    
+
     cap = cv.VideoCapture(cam_src)
     if not cap.isOpened():
         raise RuntimeError("Failed to open camera")
@@ -51,7 +55,7 @@ def detect_color(cam_src: int | str, color: ColorInput) -> None:
         if not ret:
             logging.warning("Failed to read frame from camera")
             continue
-        
+
         hsv_frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
         mask = create_mask(hsv_frame, color)
         result = cv.bitwise_and(frame, frame, mask=mask)

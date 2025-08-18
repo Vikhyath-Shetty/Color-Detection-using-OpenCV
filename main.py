@@ -14,26 +14,26 @@ def main(cam_src: int | str, color: ColorInput):
 
 
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser(description="Color Detection")
-    # parser.add_argument(
-    #     "--camera", type=int, default=0, help="Camera source (default=0)"
-    # )
-    # parser.add_argument(
-    #     "--color",
-    #     nargs="+",
-    #     choices=["red", "green", "blue", "yellow"],
-    #     default="red",
-    #     help="Color(s) to detect",
-    # )
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser(description="Color Detection")
+    parser.add_argument(
+        "--camera", type=int, default=0, help="Camera source (default=0)"
+    )
+    parser.add_argument(
+        "--color",
+        nargs="+",
+        choices=["red", "green", "blue", "yellow"],
+        default="red",
+        help="Color(s) to detect",
+    )
+    args = parser.parse_args()
 
-    # try:
-    #     camera = int(args.camera)
-    # except:
-    #     camera = args.camera
+    try:
+        camera = int(args.camera)
+    except:
+        camera = args.camera
 
-    # if len(args.color) == 1:
-    #     colors = args.color[0]
-    # else:
-    #     colors = set(args.color)
-    main(0, "red")
+    if len(args.color) == 1:
+        colors = args.color[0]
+    else:
+        colors = set(args.color)
+    main(camera, colors)
