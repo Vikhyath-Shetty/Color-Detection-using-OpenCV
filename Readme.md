@@ -21,6 +21,20 @@ You can detect individual colors or multiple colors at the same time.
 - OpenCV
 - NumPy
 
+Create and activate virtual environment(Bash or zsh):
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Create and activate virtual environment(windows):
+
+```bash
+python3 -m venv .venv
+.venv\Scripts\activate
+```
+
 Install dependencies:
 
 ```bash
