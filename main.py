@@ -16,7 +16,7 @@ def main(cam_src: int | str, color: ColorInput):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Color Detection")
     parser.add_argument(
-        "--camera", type=int, default=0, help="Camera source (default=0)"
+        "--camera", default=0, help="Camera source (default=0)"
     )
     parser.add_argument(
         "--color",
